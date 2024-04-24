@@ -10,3 +10,12 @@ module "argocd_prod" {
   chart_version  = "5.46.2"
   config_context = "prod"
 }
+
+
+# Can be deployed ONLY after ArgoCD deployment: depends_on = [module.argocd_dev]
+module "argocd_dev_root" {
+  source             = "./argocd_root_app"
+  config_context     = "dev"
+  git_source_path    = "demo-dev/applications"
+  git_source_repoURL = "git@github.com:Android60/argocd.git"
+}
